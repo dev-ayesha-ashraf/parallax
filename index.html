@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f8fb;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #1a73e8;
+      color: white;
+      border-radius: 0 0 3rem 3rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      opacity: 0.85;
+    }
+
+    /* Hero Section with CTA */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .cta-button {
+      background: #25d366;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      color: white;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background: #128c7e;
+    }
+
+    /* Phone Mockup Section */
+    .phone-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 2rem;
+    }
+
+    .phone {
+      width: 360px;
+      height: 640px;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 18px;
+      background: #111;
+      border-radius: 10px;
+    }
+
+    .phone-screen {
+      padding: 1rem;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 1.2rem;
+      height: 100%;
+    }
+
+    .chat-bubble {
+      background-color: #25d366;
+      color: white;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      max-width: 75%;
+      align-self: flex-end;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .chat-bubble.left {
+      background: #f4f4f4;
+      color: #333;
+      align-self: flex-start;
+      border-radius: 1.5rem 1.5rem 1.5rem 0;
+    }
+
+    /* Carousel Section */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 2.5rem;
+      padding: 4rem 2rem;
+      scroll-snap-type: x mandatory;
+      background: #f9f9f9;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-card {
+      flex: 0 0 300px;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .carousel-card:hover {
+      transform: translateY(-8px) scale(1.05);
+    }
+
+    .carousel-card h3 {
+      font-size: 1.5rem;
+      color: #1a73e8;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-card p {
+      color: #666;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 6rem 2rem;
+      background: #f4f7fc;
+      text-align: center;
+    }
+
+    .pricing-section h2 {
+      font-size: 2.8rem;
+      color: #1a73e8;
+      margin-bottom: 2.5rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .price-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      border: 1px solid #f0f0f0;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .price-card h4 {
+      font-size: 1.8rem;
+      color: #1a73e8;
+      margin-bottom: 1rem;
+    }
+
+    .price-card p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+
+    .price-card .price {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a73e8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1rem;
+      color: #777;
+      background: #fff;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WhatsApp Assistant</h1>
+    <p>Streamline your chats. Automate your business. Save time.</p>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Transform Your Customer Support</h2>
+      <p>Automate your WhatsApp conversations to save time, boost efficiency, and enhance your customer service experience.</p>
+      <a href="#pricing" class="cta-button">Get Started</a>
+    </div>
+  </section>
+
+  <div class="phone-container">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="chat-bubble left">Hi there! Is this still in stock?</div>
+        <div class="chat-bubble">Yes, it is! Want us to reserve it?</div>
+        <div class="chat-bubble left">Sure. Also, I need the invoice.</div>
+        <div class="chat-bubble">Just sent it! 📩</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel">
+    <div class="carousel-card">
+      <h3>Auto Responses</h3>
+      <p>Save time by sending instant replies to FAQs.</p>
+    </div>
+    <div class="carousel-card">
+      <h3>Lead Manager</h3>
+      <p>Capture, tag, and follow up with leads automatically.</p>
+    </div>
+    <div class="carousel-card">
+      <h3>Campaigns</h3>
+      <p>Broadcast messages, promos, and updates with ease.</p>
+    </div>
+    <div class="carousel-card">
+      <h3>Dashboard Views</h3>
+      <p>Switch between Kanban or Calendar view effortlessly.</p>
+    </div>
+  </div>
+
+  <section class="pricing-section" id="pricing">
+    <h2>Plans & Pricing</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h4>Basic</h4>
+        <p class="price">$9/month</p>
+        <p>100 messages</p>
+        <p>1 campaign</p>
+      </div>
+      <div class="price-card">
+        <h4>Pro</h4>
+        <p class="price">$29/month</p>
+        <p>1000 messages</p>
+        <p>5 campaigns + Lead Manager</p>
+      </div>
+      <div class="price-card">
+        <h4>Enterprise</h4>
+        <p class="price">Custom</p>
+        <p>Unlimited everything</p>
+        <p>Full automation suite</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 WhatsApp Assistant. All rights reserved.
+  </footer>
+
+</body>
+</html>
